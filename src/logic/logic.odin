@@ -2,11 +2,6 @@ package logic
 
 import "core:math/rand"
 
-ROWS :: 80
-COLS :: 120
-
-Grid :: [ROWS][COLS]bool
-
 init_grid :: proc() -> Grid {
     grid: Grid
     for row in 0..<ROWS {

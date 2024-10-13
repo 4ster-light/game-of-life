@@ -2,8 +2,15 @@ package logic
 
 import rl "vendor:raylib"
 
+Grid :: distinct [ROWS][COLS]bool
+
+// Dimensions
+ROWS :: 80
+COLS :: 120
 CELL_SIZE :: 10
-GRID_COLOR :: rl.DARKGRAY
+
+// Colours
+GRID_COLOR :: rl.BLACK
 LIVE_CELL_COLOR :: rl.WHITE
 DEAD_CELL_COLOR :: rl.BLACK
 

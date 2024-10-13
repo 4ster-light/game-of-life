@@ -2,26 +2,35 @@ package main
 
 import rl "vendor:raylib"
 import "logic"
-import "render"
 
-ROWS :: 50
-COLS :: 80
+UPDATE_INTERVAL :: 0.1
 
 main :: proc() {
-    grid := logic.init_grid(ROWS, COLS)
-    defer logic.cleanup_grid(&grid)
+    grid := logic.init_grid()
 
-    render.init_window(ROWS, COLS)
+    logic.init_window()
     defer rl.CloseWindow()
 
+    last_update_time := rl.GetTime()
+    paused := false
+
     for !rl.WindowShouldClose() {
+        current_time := rl.GetTime()
+        
+        // Toggle pause state with space key
         if rl.IsKeyPressed(.SPACE) {
+            paused = !paused
+        }
+
+        // Update grid automatically every UPDATE_INTERVAL seconds
+        if !paused && current_time - last_update_time >= UPDATE_INTERVAL {
             logic.update_grid(&grid)
+            last_update_time = current_time
         }
 
         rl.BeginDrawing()
-        rl.ClearBackground(rl.RAYWHITE)
-        render.draw_grid(grid)
+        rl.ClearBackground(rl.BLACK)
+        logic.draw_grid(grid)
         rl.EndDrawing()
     }
 }

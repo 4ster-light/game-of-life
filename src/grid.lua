@@ -1,4 +1,3 @@
--- grid.lua
 local Grid = {}
 Grid.__index = Grid
 

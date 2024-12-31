@@ -1,40 +1,46 @@
--- main.lua
 local Grid = require('grid')
 local UI = require('ui')
 
--- Game state
+-- Game defaults
 local game = {
   grid = nil,
   ui = nil,
   cellSize = 15,
   paused = true,
-  speed = 0.1,     -- Update interval in seconds
-  timer = 0,
-  fadeSpeed = 2,   -- Speed of cell fade animations
+  speed = 0.1, -- Default update interval in seconds
+  timer = 0
 }
 
 function love.load()
   -- Enable antialiasing
   love.graphics.setDefaultFilter('nearest', 'nearest')
 
-  -- Calculate grid dimensions based on window size with padding
-  local padding = 100
-  local width = love.graphics.getWidth() - padding
-  local height = love.graphics.getHeight() - padding
-  local rows = math.floor(height / game.cellSize)
-  local cols = math.floor(width / game.cellSize)
-
-  -- Initialize game components
-  game.grid = Grid.new(rows, cols, game.cellSize)
+  -- Initialize UI first to get panel dimensions
   game.ui = UI.new(game)
 
-  -- Set up color palette
+  -- Calculate grid dimensions based on window size minus UI panel
+  local availableWidth = love.graphics.getWidth() - game.ui.panelWidth
+  local availableHeight = love.graphics.getHeight()
+
+  -- Add padding
+  local padding = 40
+  availableWidth = availableWidth - (padding * 2)
+  availableHeight = availableHeight - (padding * 2)
+
+  -- Calculate grid dimensions
+  local rows = math.floor(availableHeight / game.cellSize)
+  local cols = math.floor(availableWidth / game.cellSize)
+
+  -- Initialize grid
+  game.grid = Grid.new(rows, cols, game.cellSize)
+
+  -- Set up color palette with orange theme
   game.colors = {
-    background = { 0.12, 0.12, 0.18, 1 },   -- Dark background
-    cell = { 0.38, 0.85, 0.98, 1 },         -- Bright cyan
-    grid = { 0.27, 0.28, 0.35, 0.3 },       -- Subtle grid lines
-    text = { 0.88, 0.88, 0.88, 1 },         -- Light text
-    button = { 0.38, 0.85, 0.98, 1 }        -- Matching buttons
+    background = { 0.12, 0.12, 0.18, 1 }, -- Dark background
+    cell = { 1.0, 0.6, 0.2, 1 },          -- Orange
+    grid = { 0.27, 0.28, 0.35, 0.3 },     -- Subtle grid lines
+    text = { 0.88, 0.88, 0.88, 1 },       -- Light text
+    button = { 1.0, 0.6, 0.2, 1 }         -- Orange buttons
   }
 end
 
@@ -48,17 +54,15 @@ function love.update(dt)
       game.grid:update()
     end
   end
-
-  -- Update cell fade animations
-  game.grid:updateFades(dt * game.fadeSpeed)
 end
 
 function love.draw()
   -- Set background
   love.graphics.setBackgroundColor(unpack(game.colors.background))
 
-  -- Draw grid with offset for centering
-  local offsetX = (love.graphics.getWidth() - game.grid.cols * game.cellSize) / 2
+  -- Calculate grid offset to center in available space
+  local availableWidth = love.graphics.getWidth() - game.ui.panelWidth
+  local offsetX = (availableWidth - game.grid.cols * game.cellSize) / 2
   local offsetY = (love.graphics.getHeight() - game.grid.rows * game.cellSize) / 2
 
   love.graphics.push()
@@ -74,8 +78,14 @@ end
 
 function love.mousepressed(x, y, button)
   if button == 1 then
-    -- Adjust for grid offset
-    local offsetX = (love.graphics.getWidth() - game.grid.cols * game.cellSize) / 2
+    -- Check UI interactions first
+    if game.ui:click(x, y) then
+      return
+    end
+
+    -- Calculate grid offset
+    local availableWidth = love.graphics.getWidth() - game.ui.panelWidth
+    local offsetX = (availableWidth - game.grid.cols * game.cellSize) / 2
     local offsetY = (love.graphics.getHeight() - game.grid.rows * game.cellSize) / 2
 
     -- Convert mouse coordinates to grid position
@@ -86,9 +96,6 @@ function love.mousepressed(x, y, button)
     if game.grid:isValidPosition(gridX, gridY) then
       game.grid:toggleCell(gridX, gridY)
     end
-
-    -- Check UI interactions
-    game.ui:click(x, y)
   end
 end
 

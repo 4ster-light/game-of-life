@@ -1,15 +1,13 @@
-# Game of Life
+# Conway's Game of Life simulator
 
-A simple implementation of Conway's Game of Life in TypeScript.
+## How to run
+You need to have [Lua](https://www.lua.org/download.html) installed.
 
-## Usage
+Along with [Love2D](https://love2d.org/), which is the only dependency, you can run the simulation by running the following command:
 
 ```bash
-cd game-of-life
-bun install
-bun run dev
+love src
 ```
 
-## License
-
-Apache 2.0
+# License
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.

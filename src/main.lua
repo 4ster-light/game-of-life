@@ -1,10 +1,20 @@
-local Grid = require('grid')
-local UI = require('ui')
+local Grid = require("grid")
+local UI = require("ui")
+
+-- Lua compatibility
+unpack = table.unpack or unpack
 
 -- Game defaults
 local game = {
   grid = nil,
   ui = nil,
+  colors = {
+    background = { 0.12, 0.12, 0.18, 1 }, -- Dark background
+    cell = { 1.0, 0.6, 0.2, 1 },          -- Orange
+    grid = { 0.27, 0.28, 0.35, 0.3 },     -- Subtle grid lines
+    text = { 0.88, 0.88, 0.88, 1 },       -- Light text
+    button = { 1.0, 0.6, 0.2, 1 }         -- Orange buttons
+  },
   cellSize = 15,
   paused = true,
   speed = 0.1, -- Default update interval in seconds
@@ -12,8 +22,11 @@ local game = {
 }
 
 function love.load()
+  -- Set window title
+  love.window.setTitle("Game of Life")
+
   -- Enable antialiasing
-  love.graphics.setDefaultFilter('nearest', 'nearest')
+  love.graphics.setDefaultFilter("nearest", "nearest")
 
   -- Initialize UI first to get panel dimensions
   game.ui = UI.new(game)
@@ -33,15 +46,6 @@ function love.load()
 
   -- Initialize grid
   game.grid = Grid.new(rows, cols, game.cellSize)
-
-  -- Set up color palette with orange theme
-  game.colors = {
-    background = { 0.12, 0.12, 0.18, 1 }, -- Dark background
-    cell = { 1.0, 0.6, 0.2, 1 },          -- Orange
-    grid = { 0.27, 0.28, 0.35, 0.3 },     -- Subtle grid lines
-    text = { 0.88, 0.88, 0.88, 1 },       -- Light text
-    button = { 1.0, 0.6, 0.2, 1 }         -- Orange buttons
-  }
 end
 
 function love.update(dt)
@@ -100,11 +104,11 @@ function love.mousepressed(x, y, button)
 end
 
 function love.keypressed(key)
-  if key == 'space' then
+  if key == "space" then
     game.paused = not game.paused
-  elseif key == 'r' then
+  elseif key == "r" then
     game.grid:randomize()
-  elseif key == 'c' then
+  elseif key == "c" then
     game.grid:clear()
   end
 end

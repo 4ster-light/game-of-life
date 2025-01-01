@@ -71,7 +71,7 @@ function UI:update(dt) end
 function UI:draw()
   -- Draw side panel background
   love.graphics.setColor(0.15, 0.15, 0.2, 0.8)
-  love.graphics.rectangle('fill',
+  love.graphics.rectangle("fill",
     love.graphics.getWidth() - self.panelWidth, 0,
     self.panelWidth, love.graphics.getHeight())
 
@@ -109,12 +109,12 @@ function UI:draw()
       love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
         self.game.colors.button[3], 0.15)
     end
-    love.graphics.rectangle('fill', button.x, button.y, button.width, button.height, 8)
+    love.graphics.rectangle("fill", button.x, button.y, button.width, button.height, 8)
 
     -- Button border
     love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
       self.game.colors.button[3], 0.5)
-    love.graphics.rectangle('line', button.x, button.y, button.width, button.height, 8)
+    love.graphics.rectangle("line", button.x, button.y, button.width, button.height, 8)
 
     -- Button text
     love.graphics.setColor(unpack(self.game.colors.text))
@@ -138,7 +138,7 @@ function UI:draw()
   -- Slider background
   love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
     self.game.colors.button[3], 0.15)
-  love.graphics.rectangle('fill',
+  love.graphics.rectangle("fill",
     self.speedSlider.x, self.speedSlider.y,
     self.speedSlider.width, self.speedSlider.height, 4)
 
@@ -148,7 +148,7 @@ function UI:draw()
       (self.speedSlider.max - self.speedSlider.min) *
       self.speedSlider.width
   love.graphics.setColor(unpack(self.game.colors.button))
-  love.graphics.rectangle('fill',
+  love.graphics.rectangle("fill",
     handlePos - 5, self.speedSlider.y - 5,
     10, self.speedSlider.height + 10, 4)
 

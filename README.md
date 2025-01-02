@@ -12,6 +12,8 @@ Along with [Love2D](https://love2d.org/), which is the only dependency, you can 
 love src
 ```
 
+(love runs a directory as a package so don't do `love .`)
+
 ## License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
+Apache 2.0

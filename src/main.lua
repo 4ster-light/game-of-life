@@ -49,7 +49,7 @@ function love.load()
 end
 
 function love.update(dt)
-  game.ui:update(dt)
+  game.ui:update()
 
   if not game.paused then
     game.timer = game.timer + dt

@@ -66,23 +66,30 @@ function UI.new(game)
   return self
 end
 
-function UI:update(dt) end
+function UI:update() end
 
 function UI:draw()
-  -- Draw side panel background
+  self:drawPanelBackground()
+  self:drawTitle()
+  self:drawButtons()
+  self:drawSpeedSlider()
+  self:drawStatus()
+end
+
+function UI:drawPanelBackground()
   love.graphics.setColor(0.15, 0.15, 0.2, 0.8)
   love.graphics.rectangle("fill",
     love.graphics.getWidth() - self.panelWidth, 0,
     self.panelWidth, love.graphics.getHeight())
+end
 
-  -- Draw title with word wrapping
+function UI:drawTitle()
   love.graphics.setColor(unpack(self.game.colors.text))
   local title = "Conway's\nGame of Life"
   local titleFont = love.graphics.newFont(24)
   love.graphics.setFont(titleFont)
 
   local _, wrappedText = titleFont:getWrap(title, self.panelWidth - 40)
-  local titleHeight = #wrappedText * titleFont:getHeight()
 
   local startY = 30
   for i, line in ipairs(wrappedText) do
@@ -93,43 +100,41 @@ function UI:draw()
       startY + (i - 1) * titleFont:getHeight()
     )
   end
+end
 
-  -- Draw buttons
+function UI:drawButtons()
   for _, button in ipairs(self.buttons) do
-    -- Button background
-    local isActive = false
-    if button.text:find("Play") and self.game.paused then
-      isActive = true
-    end
-
-    if isActive then
-      love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
-        self.game.colors.button[3], 0.3)
-    else
-      love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
-        self.game.colors.button[3], 0.15)
-    end
-    love.graphics.rectangle("fill", button.x, button.y, button.width, button.height, 8)
-
-    -- Button border
-    love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
-      self.game.colors.button[3], 0.5)
-    love.graphics.rectangle("line", button.x, button.y, button.width, button.height, 8)
-
-    -- Button text
-    love.graphics.setColor(unpack(self.game.colors.text))
-    local font = love.graphics.newFont(14)
-    love.graphics.setFont(font)
-    local textWidth = font:getWidth(button.text)
-    local textHeight = font:getHeight()
-    love.graphics.print(
-      button.text,
-      button.x + button.width / 2 - textWidth / 2,
-      button.y + button.height / 2 - textHeight / 2
-    )
+    self:drawButton(button)
   end
+end
 
-  -- Draw speed slider
+function UI:drawButton(button)
+  -- Button background
+  local isActive = button.text:find("Play") and self.game.paused
+  local alpha = isActive and 0.3 or 0.15
+  love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
+    self.game.colors.button[3], alpha)
+  love.graphics.rectangle("fill", button.x, button.y, button.width, button.height, 8)
+
+  -- Button border
+  love.graphics.setColor(self.game.colors.button[1], self.game.colors.button[2],
+    self.game.colors.button[3], 0.5)
+  love.graphics.rectangle("line", button.x, button.y, button.width, button.height, 8)
+
+  -- Button text
+  love.graphics.setColor(unpack(self.game.colors.text))
+  local font = love.graphics.newFont(14)
+  love.graphics.setFont(font)
+  local textWidth = font:getWidth(button.text)
+  local textHeight = font:getHeight()
+  love.graphics.print(
+    button.text,
+    button.x + button.width / 2 - textWidth / 2,
+    button.y + button.height / 2 - textHeight / 2
+  )
+end
+
+function UI:drawSpeedSlider()
   love.graphics.setColor(unpack(self.game.colors.text))
   local font = love.graphics.newFont(14)
   love.graphics.setFont(font)
@@ -151,15 +156,13 @@ function UI:draw()
   love.graphics.rectangle("fill",
     handlePos - 5, self.speedSlider.y - 5,
     10, self.speedSlider.height + 10, 4)
+end
 
-  -- Draw status
+function UI:drawStatus()
   local statusY = self.speedSlider.y + 60
   love.graphics.setColor(unpack(self.game.colors.text))
-  if self.game.paused then
-    love.graphics.print("Status: PAUSED", self.speedSlider.x, statusY)
-  else
-    love.graphics.print("Status: RUNNING", self.speedSlider.x, statusY)
-  end
+  local statusText = self.game.paused and "Status: PAUSED" or "Status: RUNNING"
+  love.graphics.print(statusText, self.speedSlider.x, statusY)
 end
 
 function UI:click(x, y)

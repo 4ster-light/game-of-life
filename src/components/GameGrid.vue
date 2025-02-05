@@ -1,10 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useGameStore } from "../game";
 
-const store = useGameStore();
-const { grid, isRunning, columns, rows } = storeToRefs(store);
-const { toggleCell } = store;
+const game = useGameStore();
+const { grid, isRunning, columns, rows } = storeToRefs(game);
 </script>
 
 <template>
@@ -15,7 +14,7 @@ const { toggleCell } = store;
     }">
       <div v-for="(row, i) in grid" :key="i" class="grid-row">
         <div v-for="(cell, j) in row" :key="j" class="cell" :class="{ 'alive': cell, 'running': isRunning }"
-          @click="toggleCell(i, j)" />
+          @click="game.toggleCell(i, j)" />
       </div>
     </div>
   </div>

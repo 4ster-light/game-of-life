@@ -1,28 +1,20 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useGameStore } from "../game";
 
-const store = useGameStore();
-const { isRunning, generations } = storeToRefs(store);
-
-const toggleSimulation = () => {
-  if (isRunning.value) store.stop();
-  else store.start();
-};
-
-const randomize = () => store.randomize();
-const clear = () => store.clear();
+const game = useGameStore();
+const { isRunning, generations } = storeToRefs(game);
 </script>
 
 <template>
   <div class="controls">
     <div class="generations">Generations: {{ generations }}</div>
     <div class="buttons">
-      <button @click="toggleSimulation" :class="['btn', isRunning ? 'stop' : 'start']">
-        {{ isRunning ? 'Stop' : 'Start' }}
+      <button @click="isRunning ? game.stop() : game.start()" :class="['btn', isRunning ? 'stop' : 'start']">
+        {{ isRunning ? "Stop" : "Start" }}
       </button>
-      <button @click="randomize" class="btn random">Randomize</button>
-      <button @click="clear" class="btn clear">Clear</button>
+      <button @click="game.randomize" class="btn random">Randomize</button>
+      <button @click="game.clear" class="btn clear">Clear</button>
     </div>
   </div>
 </template>

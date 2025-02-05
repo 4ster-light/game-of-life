@@ -4,7 +4,7 @@ import { onMounted, ref } from "vue";
 export const useGameStore = defineStore("game", () => {
 	const columns = ref(Math.floor(window.innerWidth / 30));
 	const rows = ref(Math.floor(window.innerHeight / 30));
-	const grid = ref<boolean[][]>(initializeGrid());
+	const grid = ref(initializeGrid());
 	const isRunning = ref(false);
 	const generations = ref(0);
 	let intervalId: number | null = null;
@@ -23,13 +23,19 @@ export const useGameStore = defineStore("game", () => {
 
 	function randomize(): void {
 		stop();
-		grid.value = grid.value.map((row) => row.map(() => Math.random() > 0.85));
+		const newGrid: boolean[][] = initializeGrid();
+		for (let i = 0; i < rows.value; i++) {
+			for (let j = 0; j < columns.value; j++) {
+				newGrid[i][j] = Math.random() > 0.85;
+			}
+		}
+		grid.value = newGrid;
 		generations.value = 0;
 	}
 
 	function clear(): void {
 		stop();
-		grid.value = grid.value.map((row) => row.map(() => false));
+		grid.value = initializeGrid();
 		generations.value = 0;
 	}
 
@@ -46,12 +52,14 @@ export const useGameStore = defineStore("game", () => {
 	}
 
 	function nextGeneration(): void {
-		const newGrid = grid.value.map((row, i) =>
-			row.map((cell, j) => {
+		const newGrid: boolean[][] = initializeGrid();
+		for (let i = 0; i < rows.value; i++) {
+			for (let j = 0; j < columns.value; j++) {
 				const neighbors = countNeighbors(i, j);
-				return neighbors === 3 || (cell && neighbors === 2);
-			}),
-		);
+				newGrid[i][j] =
+					neighbors === 3 || (grid.value[i][j] && neighbors === 2);
+			}
+		}
 		grid.value = newGrid;
 		generations.value++;
 	}

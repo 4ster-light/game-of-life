@@ -12,8 +12,6 @@ import GameGrid from "./components/GameGrid.vue";
 </template>
 
 <style>
-@import "./assets/base.css";
-
 #app {
   min-height: 100dvh;
   display: flex;

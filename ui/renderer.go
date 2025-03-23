@@ -24,8 +24,8 @@ func NewRenderer() *Renderer {
 func (r *Renderer) DrawGrid(gameGrid *grid.Grid, offsetX, offsetY float32) {
 	rl.ClearBackground(r.UI.BgColor)
 
-	for i := 0; i < gameGrid.Rows; i++ {
-		for j := 0; j < gameGrid.Cols; j++ {
+	for i := range gameGrid.Rows {
+		for j := range gameGrid.Cols {
 			// Convert grid coordinates to isometric coordinates
 			isoX, isoY := utils.CartesianToIsometric(float32(j), float32(i))
 
@@ -59,11 +59,11 @@ func (r *Renderer) DrawGrid(gameGrid *grid.Grid, offsetX, offsetY float32) {
 					r.UI.CellColor,
 				)
 
-				// Always draw white outline for better visibility
-				rl.DrawLineV(rl.Vector2{X: x1, Y: y1}, rl.Vector2{X: x2, Y: y2}, rl.White)
-				rl.DrawLineV(rl.Vector2{X: x2, Y: y2}, rl.Vector2{X: x3, Y: y3}, rl.White)
-				rl.DrawLineV(rl.Vector2{X: x3, Y: y3}, rl.Vector2{X: x4, Y: y4}, rl.White)
-				rl.DrawLineV(rl.Vector2{X: x4, Y: y4}, rl.Vector2{X: x1, Y: y1}, rl.White)
+				// Draw outline using the selected cell color for better visibility
+				rl.DrawLineV(rl.Vector2{X: x1, Y: y1}, rl.Vector2{X: x2, Y: y2}, r.UI.CellColor)
+				rl.DrawLineV(rl.Vector2{X: x2, Y: y2}, rl.Vector2{X: x3, Y: y3}, r.UI.CellColor)
+				rl.DrawLineV(rl.Vector2{X: x3, Y: y3}, rl.Vector2{X: x4, Y: y4}, r.UI.CellColor)
+				rl.DrawLineV(rl.Vector2{X: x4, Y: y4}, rl.Vector2{X: x1, Y: y1}, r.UI.CellColor)
 			} else {
 				// Draw empty cell outline
 				rl.DrawLineV(rl.Vector2{X: x1, Y: y1}, rl.Vector2{X: x2, Y: y2}, r.UI.GridColor)

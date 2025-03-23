@@ -30,17 +30,17 @@ func (g *Grid) Initialize() {
 	g.Cells = make([][]Cell, g.Rows)
 	g.NextCells = make([][]Cell, g.Rows)
 
-	for i := 0; i < g.Rows; i++ {
+	for i := range g.Rows {
 		g.Cells[i] = make([]Cell, g.Cols)
 		g.NextCells[i] = make([]Cell, g.Cols)
 	}
 }
 
 func (g *Grid) Randomize() {
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 
-	for i := 0; i < g.Rows; i++ {
-		for j := 0; j < g.Cols; j++ {
+	for i := range g.Rows {
+		for j := range g.Cols {
 			g.Cells[i][j].Alive = rand.Float32() > 0.85
 		}
 	}
@@ -48,8 +48,8 @@ func (g *Grid) Randomize() {
 }
 
 func (g *Grid) Clear() {
-	for i := 0; i < g.Rows; i++ {
-		for j := 0; j < g.Cols; j++ {
+	for i := range g.Rows {
+		for j := range g.Cols {
 			g.Cells[i][j].Alive = false
 		}
 	}
@@ -85,8 +85,8 @@ func (g *Grid) CountNeighbors(row, col int) int {
 
 func (g *Grid) NextGeneration() {
 	// Calculate the next generation
-	for i := 0; i < g.Rows; i++ {
-		for j := 0; j < g.Cols; j++ {
+	for i := range g.Rows {
+		for j := range g.Cols {
 			neighbors := g.CountNeighbors(i, j)
 
 			// Apply Conway's Game of Life rules
@@ -95,8 +95,8 @@ func (g *Grid) NextGeneration() {
 	}
 
 	// Copy the next generation to the current grid
-	for i := 0; i < g.Rows; i++ {
-		for j := 0; j < g.Cols; j++ {
+	for i := range g.Rows {
+		for j := range g.Cols {
 			g.Cells[i][j] = g.NextCells[i][j]
 		}
 	}

@@ -1,4 +1,4 @@
-package ui
+package renderer
 
 import (
 	"github.com/4ster-light/game-of-life/utils"

@@ -2,14 +2,14 @@ package game
 
 import (
 	"github.com/4ster-light/game-of-life/grid"
-	"github.com/4ster-light/game-of-life/ui"
+	"github.com/4ster-light/game-of-life/renderer"
 	"github.com/4ster-light/game-of-life/utils"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 type Game struct {
 	Grid           *grid.Grid
-	Renderer       *ui.Renderer
+	Renderer       *renderer.Renderer
 	State          utils.GameState
 	OffsetX        float32
 	OffsetY        float32
@@ -20,7 +20,7 @@ type Game struct {
 func NewGame(rows, cols int) *Game {
 	return &Game{
 		Grid:           grid.NewGrid(rows, cols),
-		Renderer:       ui.NewRenderer(),
+		Renderer:       renderer.NewRenderer(),
 		State:          utils.Menu,
 		OffsetX:        (float32(utils.ScreenWidth) - float32(cols*utils.CellSize)) / 2,  // Center horizontally
 		OffsetY:        (float32(utils.ScreenHeight) - float32(rows*utils.CellSize)) / 2, // Center vertically

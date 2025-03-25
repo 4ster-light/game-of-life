@@ -1,7 +1,6 @@
-# Game of Life - Isometric Edition
+# Game of Life
 
-An implementation of Conway's Game of Life with an isometric perspective,
-written in Go using Raylib.
+An implementation of Conway's Game of Life written in Go using Raylib.
 
 ## Features
 

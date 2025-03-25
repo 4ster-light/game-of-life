@@ -28,13 +28,8 @@ func (m *Menu) Draw() (utils.GameState, bool) {
 
 	// Draw title - centered
 	titleText := "GAME OF LIFE"
-	subtitleText := "Isometric Edition"
-
 	titleX := int32(utils.ScreenWidth/2 - rl.MeasureText(titleText, 40)/2)
-	subtitleX := int32(utils.ScreenWidth/2 - rl.MeasureText(subtitleText, 25)/2)
-
 	rl.DrawText(titleText, titleX, 100, 40, rl.White)
-	rl.DrawText(subtitleText, subtitleX, 150, 25, rl.LightGray)
 
 	// Calculate menu center position
 	menuCenterX := int32(utils.ScreenWidth / 2)

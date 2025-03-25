@@ -88,8 +88,6 @@ func (g *Grid) NextGeneration() {
 	for i := range g.Rows {
 		for j := range g.Cols {
 			neighbors := g.CountNeighbors(i, j)
-
-			// Apply Conway's Game of Life rules
 			g.NextCells[i][j].Alive = neighbors == 3 || (g.Cells[i][j].Alive && neighbors == 2)
 		}
 	}

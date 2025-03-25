@@ -6,10 +6,8 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const TITLE = "Game of Life - Isometric Edition"
-
 func main() {
-	rl.InitWindow(utils.ScreenWidth, utils.ScreenHeight, TITLE)
+	rl.InitWindow(utils.ScreenWidth, utils.ScreenHeight, "Game of Life")
 	rl.SetTargetFPS(60)
 
 	gameInstance := game.NewGame(40, 40)

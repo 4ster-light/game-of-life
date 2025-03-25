@@ -5,7 +5,7 @@ import rl "github.com/gen2brain/raylib-go/raylib"
 const (
 	ScreenWidth  = 1280
 	ScreenHeight = 720
-	CellSize     = 40
+	CellSize     = 20
 )
 
 type GameState int

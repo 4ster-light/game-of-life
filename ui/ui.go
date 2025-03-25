@@ -32,7 +32,7 @@ func (u *UI) DrawGameInfo(generations, rows, cols int) {
 	rl.DrawText(genText, 20, 20, 20, rl.White)
 
 	// Draw controls help
-	controlsText := "Space: Play/Pause | R: Randomize | C: Clear | Arrows: Move | ESC: Menu"
+	controlsText := "Space: Play/Pause | R: Randomize | C: Clear | Arrows: Move | ESC: Exit"
 	rl.DrawText(controlsText, 20, utils.ScreenHeight-30, 16, rl.White)
 
 	// Right side UI panel - move closer to right edge

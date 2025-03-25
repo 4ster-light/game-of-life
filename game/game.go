@@ -22,10 +22,10 @@ func NewGame(rows, cols int) *Game {
 		Grid:           grid.NewGrid(rows, cols),
 		Renderer:       ui.NewRenderer(),
 		State:          utils.Menu,
-		OffsetX:        float32(utils.ScreenWidth) / 2,
-		OffsetY:        float32(utils.ScreenHeight) / 4,
+		OffsetX:        (float32(utils.ScreenWidth) - float32(cols*utils.CellSize)) / 2,  // Center horizontally
+		OffsetY:        (float32(utils.ScreenHeight) - float32(rows*utils.CellSize)) / 2, // Center vertically
 		LastUpdateTime: 0,
-		UpdateInterval: 0.2, // seconds between updates
+		UpdateInterval: 0.2,
 	}
 }
 

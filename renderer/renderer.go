@@ -23,20 +23,16 @@ func NewRenderer() *Renderer {
 
 func (r *Renderer) DrawGrid(gameGrid *grid.Grid, offsetX, offsetY float32) {
 	rl.ClearBackground(r.UI.BgColor)
-
 	cellSize := float32(utils.CellSize)
+
 	for i := range gameGrid.Rows {
 		for j := range gameGrid.Cols {
-			x := float32(j)*cellSize*r.Zoom + offsetX
-			y := float32(i)*cellSize*r.Zoom + offsetY
-			width := cellSize * r.Zoom
-			height := cellSize * r.Zoom
-
+			size := cellSize * r.Zoom
 			cellRect := rl.Rectangle{
-				X:      x,
-				Y:      y,
-				Width:  width,
-				Height: height,
+				X:      (float32(j)*cellSize*r.Zoom + offsetX),
+				Y:      (float32(i)*cellSize*r.Zoom + offsetY),
+				Width:  size,
+				Height: size,
 			}
 
 			if gameGrid.Cells[i][j].Alive {

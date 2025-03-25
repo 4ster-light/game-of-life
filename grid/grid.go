@@ -38,7 +38,6 @@ func (g *Grid) Initialize() {
 
 func (g *Grid) Randomize() {
 	rand.New(rand.NewSource(time.Now().UnixNano()))
-
 	for i := range g.Rows {
 		for j := range g.Cols {
 			g.Cells[i][j].Alive = rand.Float32() > 0.85
@@ -63,7 +62,7 @@ func (g *Grid) ToggleCell(row, col int) {
 }
 
 func (g *Grid) CountNeighbors(row, col int) int {
-	count := 0
+	var count int
 
 	for i := -1; i <= 1; i++ {
 		for j := -1; j <= 1; j++ {

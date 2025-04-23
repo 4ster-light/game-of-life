@@ -1,6 +1,6 @@
 # Game of Life
 
-An implementation of Conway's Game of Life written in Go using Raylib.
+An implementation of Conway's Game of Life written in Odin using Raylib.
 
 ## Features
 
@@ -22,30 +22,23 @@ An implementation of Conway's Game of Life written in Go using Raylib.
 
 ## Requirements
 
-- Go 1.24.1 or later
-- Raylib-go
+Odin dev-2025-04:d9f990d42 or later
 
 ## Usage
 
-1. Install Go from [golang.org](https://golang.org/)
+1. Install Odin from [odin-lang.org](https://odin-lang.org/)
 
 2. Clone this repository:
 
    ```bash
-   git clone https://github.com/4ster-light/game-of-life.git
+   git clone --single-branch --branch main --depth 1 https://github.com/4ster-light/game-of-life.git
    cd game-of-life
    ```
 
-3. Install dependencies:
+3. Run the game:
 
    ```bash
-   go mod tidy
-   ```
-
-4. Run the game:
-
-   ```bash
-   go run . # or build with go build .
+   odin run .
    ```
 
 ## Game of Life Rules

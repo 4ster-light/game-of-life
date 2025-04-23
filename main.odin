@@ -17,4 +17,3 @@ main :: proc() {
 		game.draw(&game_instance)
 	}
 }
-

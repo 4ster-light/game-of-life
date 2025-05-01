@@ -2,7 +2,7 @@
 
 An implementation of Conway's Game of Life written in Lua.
 
-![Showcase Image](https://raw.githubusercontent.com/4ster-light/game-of-life/main/Showcase.png)
+![Showcase Image](https://github.com/4ster-light/game-of-life/blob/main/Showcase.png)
 
 ## Features
 

@@ -1,6 +1,8 @@
 # Game of Life
 
-An implementation of Conway's Game of Life written in Odin using Raylib.
+An implementation of Conway's Game of Life written in Lua.
+
+![Showcase Image](https://raw.githubusercontent.com/4ster-light/game-of-life/main/Showcase.png)
 
 ## Features
 
@@ -22,11 +24,11 @@ An implementation of Conway's Game of Life written in Odin using Raylib.
 
 ## Requirements
 
-Odin dev-2025-04:d9f990d42 or later
+Lua 5.* and LÖVE2D binary
 
 ## Usage
 
-1. Install Odin from [odin-lang.org](https://odin-lang.org/)
+1. Install LÖVE2D
 
 2. Clone this repository:
 
@@ -38,7 +40,7 @@ Odin dev-2025-04:d9f990d42 or later
 3. Run the game:
 
    ```bash
-   odin run .
+   love src
    ```
 
 ## Game of Life Rules

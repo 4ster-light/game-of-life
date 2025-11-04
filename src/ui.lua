@@ -1,5 +1,3 @@
----@diagnostic disable: undefined-field, undefined-doc-name
-
 local Constants = require("constants")
 
 ---@alias Color { [1]: number, [2]: number, [3]: number }
@@ -9,7 +7,7 @@ local UI = {}
 
 ---@param game table
 function UI.draw_background(game)
-  love.graphics.setColor(game.bg_color)
+  love.graphics.setColor(table.unpack(game.bg_color))
   love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
   love.graphics.setColor(0.1, 0.1, 0.15, 0.5)
   love.graphics.rectangle("fill", 0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT)
@@ -34,7 +32,7 @@ function UI.draw_grid(game)
         love.graphics.setColor(game.cell_color[1], game.cell_color[2], game.cell_color[3], game.cell_alpha[i][j])
         love.graphics.rectangle("fill", x + 1, y + 1, cell_size - 2, cell_size - 2, 2, 2)
       end
-      love.graphics.setColor(game.grid_color)
+      love.graphics.setColor(table.unpack(game.grid_color))
       love.graphics.rectangle("line", x, y, cell_size, cell_size)
     end
   end
@@ -124,7 +122,7 @@ function UI.draw_game_ui(game, font_ui, font_small)
   right_panel_y = right_panel_y + element_spacing
 
   love.graphics.print("Cell Color:", right_panel_x, right_panel_y)
-  love.graphics.setColor(game.cell_color)
+  love.graphics.setColor(table.unpack(game.cell_color))
   love.graphics.rectangle("fill", right_panel_x + 120, right_panel_y, 30, 30, 5, 5)
   love.graphics.setColor(1, 1, 1)
   love.graphics.rectangle("line", right_panel_x + 120, right_panel_y, 30, 30, 5, 5)

@@ -1,8 +1,6 @@
 local Constants = require("constants")
 local UI = require("ui")
 
--- Rect alias defined in ui.lua
-
 local Input = {}
 
 ---@param game table

@@ -9,8 +9,5 @@ dependencies = ["pygame>=2.6.1"]
 [dependency-groups]
 dev = ["ruff>=0.14.3"]
 
-[tool.ruff]
-line-length = 120
-
 [tool.ruff.format]
 indent-style = "tab"

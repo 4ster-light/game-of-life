@@ -5,6 +5,7 @@ class Cell:
 	def __init__(self, state: bool = False):
 		self.state = state
 
+	@property
 	def is_alive(self) -> bool:
 		return self.state
 
@@ -23,7 +24,7 @@ class Grid:
 
 	def get_cell(self, x: int, y: int) -> bool:
 		if 0 <= x < self.width and 0 <= y < self.height:
-			return self.cells[y][x].is_alive()
+			return self.cells[y][x].is_alive
 		return False
 
 	def set_cell(self, x: int, y: int, state: bool) -> None:

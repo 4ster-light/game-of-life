@@ -34,7 +34,7 @@ ZOOM_INITIAL = 1.0
 ZOOM_MIN = 0.5
 ZOOM_MAX = 5.0
 
-CONSTROLS = [
+CONTROLS: list[tuple[str, str]] = [
 	("SPACE", "Play/Pause"),
 	("R", "Randomize"),
 	("C", "Clear"),

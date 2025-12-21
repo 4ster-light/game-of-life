@@ -20,7 +20,7 @@ class Grid:
 	def __init__(self, width: int, height: int):
 		self.width = width
 		self.height = height
-		self.cells = [[Cell() for _ in range(width)] for _ in range(height)]
+		self.cells: list[list[Cell]] = [[Cell() for _ in range(width)] for _ in range(height)]
 
 	def get_cell(self, x: int, y: int) -> bool:
 		if 0 <= x < self.width and 0 <= y < self.height:
@@ -47,7 +47,7 @@ class Grid:
 		return count
 
 	def update(self) -> None:
-		new_cells = [[Cell() for _ in range(self.width)] for _ in range(self.height)]
+		new_cells: list[list[Cell]] = [[Cell() for _ in range(self.width)] for _ in range(self.height)]
 
 		for y in range(self.height):
 			for x in range(self.width):
@@ -67,4 +67,4 @@ class Grid:
 				self.cells[y][x].set_state(random.random() < 0.3)
 
 	def clear(self) -> None:
-		self.cells = [[Cell() for _ in range(self.width)] for _ in range(self.height)]
+		self.cells: list[list[Cell]] = [[Cell() for _ in range(self.width)] for _ in range(self.height)]

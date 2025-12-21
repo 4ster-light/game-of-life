@@ -11,7 +11,7 @@ from constants import (
 	ZOOM_INITIAL,
 	ZOOM_MIN,
 	ZOOM_MAX,
-	CONSTROLS,
+	CONTROLS,
 	WINDOW_WIDTH,
 	WINDOW_HEIGHT,
 	GRID_WIDTH,
@@ -211,7 +211,7 @@ class GameOfLife:
 		self.screen.blit(controls_title, (sidebar_x + UI_PADDING, y_offset))
 		y_offset += 30
 
-		for key, action in CONSTROLS:
+		for key, action in CONTROLS:
 			key_text: pygame.Surface = small_font.render(key, True, (100, 200, 255))
 			action_text: pygame.Surface = small_font.render(action, True, (200, 200, 200))
 			self.screen.blit(key_text, (sidebar_x + UI_PADDING, y_offset))

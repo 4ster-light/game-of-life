@@ -131,9 +131,7 @@ class GameOfLife:
 
 		# Draw grid area
 		grid_area_width = self.window_width - SIDEBAR_WIDTH
-		pygame.draw.rect(
-			self.screen, COLOR_DEAD_CELL, (0, 0, grid_area_width, self.window_height)
-		)
+		pygame.draw.rect(self.screen, COLOR_DEAD_CELL, (0, 0, grid_area_width, self.window_height))
 
 		cell_size = self._cell_size()
 
@@ -161,9 +159,7 @@ class GameOfLife:
 
 		# Draw sidebar
 		sidebar_x = self.window_width - SIDEBAR_WIDTH
-		pygame.draw.rect(
-			self.screen, (40, 40, 40), (sidebar_x, 0, SIDEBAR_WIDTH, self.window_height)
-		)
+		pygame.draw.rect(self.screen, (40, 40, 40), (sidebar_x, 0, SIDEBAR_WIDTH, self.window_height))
 		pygame.draw.line(
 			self.screen,
 			(100, 100, 100),
@@ -185,12 +181,7 @@ class GameOfLife:
 		y_offset += 35
 
 		# Stats
-		cell_count = sum(
-			1
-			for y in range(self.grid.height)
-			for x in range(self.grid.width)
-			if self.grid.get_cell(x, y)
-		)
+		cell_count = sum(1 for y in range(self.grid.height) for x in range(self.grid.width) if self.grid.get_cell(x, y))
 		small_font = pygame.font.Font(None, 20)
 		stats_lines = [
 			f"Live Cells: {cell_count}",
@@ -222,9 +213,7 @@ class GameOfLife:
 
 		for key, action in CONSTROLS:
 			key_text: pygame.Surface = small_font.render(key, True, (100, 200, 255))
-			action_text: pygame.Surface = small_font.render(
-				action, True, (200, 200, 200)
-			)
+			action_text: pygame.Surface = small_font.render(action, True, (200, 200, 200))
 			self.screen.blit(key_text, (sidebar_x + UI_PADDING, y_offset))
 			self.screen.blit(action_text, (sidebar_x + 100, y_offset))
 			y_offset += 20

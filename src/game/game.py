@@ -1,6 +1,6 @@
 import pygame
-from grid import Grid
-from constants import (
+from .grid import Grid
+from .constants import (
 	COLOR_DEAD_CELL,
 	COLOR_LIVE_CELL,
 	COLOR_GRID_LINE,

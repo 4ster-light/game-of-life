@@ -1,10 +1,10 @@
 import sys
 import pygame
-from game import GameOfLife
-from constants import UI_FPS
+from .game import GameOfLife
+from .constants import UI_FPS
 
 
-if __name__ == "__main__":
+def main():
 	pygame.init()
 	game = GameOfLife()
 

@@ -2,7 +2,7 @@
 
 A Python implementation of Conway's Game of Life using Pygame.
 
-![Showcase Image](https://github.com/4ster-light/game-of-life/blob/main/Showcase.png)
+![Showcase Image](Showcase.png)
 
 ## Features
 
@@ -113,9 +113,3 @@ SIDEBAR_WIDTH = 300    # Information panel width on the right
 ## License
 
 Apache License 2.0
-
-## Sponsor
-
-If you like this project, consider supporting me by buying me a coffee.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B41HVJUR)
